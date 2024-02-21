@@ -50,6 +50,13 @@ long int length (void * ptr){
         struct stringStruct  myStr = *(struct stringStruct *)ptr;
         return(myStr.length);
 }
+int compare (void * ptr1, void * ptr2){
+        int i = strcmp(new_print(ptr1),new_print(ptr2));
+        if (i == 0){
+                return(0);
+        } else {return(1);}
+
+}
 
 
 int main(){
@@ -62,6 +69,6 @@ int main(){
         copy(stringptr2,stringptr3);
         printf("Test for copy: Show me my value %p and its contents: %s\n ",stringptr2, new_print(stringptr2));
              printf("The length of the frist mstring is %d\n",length(stringptr));
-        return(0);
+        printf("Test for compare using string 1 and 2 : %d\n",compare(stringptr,stringptr2));
         return(0);
 } 
