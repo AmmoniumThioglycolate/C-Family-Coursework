@@ -1,27 +1,44 @@
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-struct stringStruct{
+struct stringStruct {
         long int length;
         char * string;
 };
 
 
 
-int main(){
+void * setString(char *str){
+        static struct stringStruct array[100];
+        static int numarray=0;
+        numarray += 1;
         struct stringStruct myStr;
-        char *str = "Hello";
         printf("What will be passed out is the question : pointer %p, as a char %s\n",*str,str);
         myStr.length = strlen(str);
-        if (!(myStr.string = (char *)malloc(300*sizeof(char)))){
+        if (!(myStr.string = (char *)malloc(30*sizeof(char)))){
                 printf("Insufficient memeory\n");
                 exit(1);
         }
         strcpy(myStr.string,str);
-
+        struct stringStruct * mystringPointer;
         printf("What will be passed out is the question : digit  %d, as a char %s\n",myStr.length,myStr.string);
-        //success. Now return a pointer         
-        return(0);
+        /*success. Now return a pointer*/
+        array[numarray]=myStr;
+        return(&array[numarray]); }
+void print(void * ptr){
+        struct stringStruct  myStr = *(struct stringStruct *)ptr;
+        printf("The values are ; digit : %d & string : %s\n",myStr.length,myStr.string);
+}
 
+int main(){
+        void * stringptr = setString("hello");
+        void * stringptr2 = setString("meheehe");
+
+        printf("Show me my value for stringptr : %p and its contents ",stringptr);
+        print(stringptr);
+        printf("Show me my value %p and its contents ",stringptr2);
+        print(stringptr2);
+        return(0);
 }
 ~  
