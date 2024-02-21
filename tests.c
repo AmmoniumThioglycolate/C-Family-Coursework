@@ -64,6 +64,10 @@ int compareString(void * ptr, char *str){
                 return(0);
         } else {return(1);}
 }
+static void msError(char *str){
+        printf("there has been an error with the string : %s\n")
+        exit(1);
+}
 
 
 int main(){
@@ -77,7 +81,6 @@ int main(){
         printf("Test for copy: Show me my value %p and its contents: %s\n ",stringptr2, new_print(stringptr2));
              printf("The length of the frist mstring is %d\n",length(stringptr));
         printf("Test for compare using string 1 and 2 : %d\n",compare(stringptr,stringptr2));
-        printf("Test for compareString using string 1 and Hello : %d\n",compare(stringptr,"Hello"));
-
+        printf("Test for compareString using string 1 and Hello : %d\n",compareString(stringptr,"Hello"));
         return(0);
 } 
