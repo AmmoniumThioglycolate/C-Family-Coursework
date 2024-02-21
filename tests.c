@@ -46,6 +46,11 @@ void copy(void **destination, void * source){
         destStr.string = sourceStr.string;
         free(*destination);
 }
+long int length (void * ptr){
+        struct stringStruct  myStr = *(struct stringStruct *)ptr;
+        return(myStr.length);
+}
+
 
 int main(){
         void * stringptr = setString("hello");
@@ -55,6 +60,8 @@ int main(){
         print(stringptr);
         printf("Show me my value %p and its contents: %s\n ",stringptr2, new_print(stringptr2));
         copy(stringptr2,stringptr3);
-        printf("Show me my value %p and its contents: %s\n ",stringptr2, new_print(stringptr3));
+        printf("Test for copy: Show me my value %p and its contents: %s\n ",stringptr2, new_print(stringptr2));
+             printf("The length of the frist mstring is %d\n",length(stringptr));
+        return(0);
         return(0);
 } 
