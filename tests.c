@@ -31,14 +31,30 @@ void print(void * ptr){
         printf("The values are ; digit : %d & string : %s\n",myStr.length,myStr.string);
 }
 
+char *new_print(void * ptr){
+        struct stringStruct  myStr = *(struct stringStruct *)ptr;
+        return(myStr.string);
+
+}
+void copy(void **destination, void * source){
+        if (!((*destination)=(void *)malloc(sizeof(source)+1))){
+                printf("Insufficient memory\n");
+                exit(1);
+        }
+        struct stringStruct destStr = *(struct stringStruct *)destination;
+        struct stringStruct sourceStr = *(struct stringStruct *)source;
+        destStr.string = sourceStr.string;
+        free(*destination);
+}
+
 int main(){
         void * stringptr = setString("hello");
         void * stringptr2 = setString("meheehe");
-
+        void * stringptr3 = setString("mlwaswe");
         printf("Show me my value for stringptr : %p and its contents ",stringptr);
         print(stringptr);
-        printf("Show me my value %p and its contents ",stringptr2);
-        print(stringptr2);
+        printf("Show me my value %p and its contents: %s\n ",stringptr2, new_print(stringptr2));
+        copy(stringptr2,stringptr3);
+        printf("Show me my value %p and its contents: %s\n ",stringptr2, new_print(stringptr3));
         return(0);
-}
-~  
+} 
