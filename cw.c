@@ -91,6 +91,7 @@ int main(int argc, char **argv){
         printf("String |%s| is %d characters long (%p).\n",msGetString(ms),msLength(ms),ms);
         msCopy(&mscopy,ms);
         printf("Copied string |%s| is %d characters long (%p).\n",msGetString(mscopy),msLength(mscopy),mscopy);
+        printf("Compare ms with mscopy: %d\n",msCompare(ms,mscopy));
         printf("Compare ms with ms2 : %d\n",msCompare(ms,ms2));
         printf("Compare ms with Hello : %d\n",msCompareString(ms,"Hello"));
         printf("Compare ms with HelloX: %d\n",msCompareString(ms,"HelloX"));
