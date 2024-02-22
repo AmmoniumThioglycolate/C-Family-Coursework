@@ -22,20 +22,12 @@ int main(int argc, char **argv){
         FILE *infp;
         FILE *outfp;
         char *filestring;
-        if(!( filestring = (char *)malloc(1000*sizeof(char)))){
+        if(!( filestring = (char *)malloc(300*sizeof(char)))){
                 printf("Insufficient memory");
                 exit(1);
         }
 
-        /*allocate memory for the files*/
-        if (!(infp = (FILE *)malloc(10000000*sizeof(FILE)))){
-                printf("Out of memory for the input file: %d: %s\n",errno,strerror(errno));
-                exit(1);
-        }
-        if (!(outfp = (FILE*)malloc(1000000*sizeof(FILE)))){
-                printf("Out of memory for the output file: %d: %s\n",errno,strerror(errno));
-                exit(1);
-        }
+
 
         /*The file in comes from the terminal, so i'll use the second*/
         /*First check there are atleast 2 arguments*/
@@ -65,7 +57,7 @@ int main(int argc, char **argv){
 
         i=strlen(filestring);
         i = i -1;
- int j=0;
+        int j=0;
         /*To reverse the file using a while loop and starting at th eend and working back and forth*/
         char filestring_reversed[i];
         while(i>0){
@@ -73,16 +65,14 @@ int main(int argc, char **argv){
                 filestring_reversed[j]=filestring[i];
                 j= j+1;
         }
-        fprintf(outfp,"%s",filestring_reversed);
+fprintf(outfp,"%s",filestring_reversed);
         /*THINGS TO BE DONE*/
 
         /*write to output file using stack*/
         /*check output file*/
         /*debug*/
-
         fclose(infp);
         fclose(outfp);
-
         /*Section on msString*/
         msString ms = msSetString("Hello");
         msString ms2 = msSetString(" World!");
@@ -96,10 +86,11 @@ int main(int argc, char **argv){
         printf("Compare ms with Hello : %d\n",msCompareString(ms,"Hello"));
         printf("Compare ms with HelloX: %d\n",msCompareString(ms,"HelloX"));
         printf("Compare ms with Hella : %d\n",msCompareString(ms,"Hella"));
-        msConcatenate(&mscopy,ms2)
-        printf("Concated string |%s| is %d characters long (%p).\n",msGetString(mscopy),msLength(mscopy),mscopy);
+        msConcatenate(&mscopy,ms2);
+        printf("Concatenated string |%s| is %d characters long (%p).\n",msGetString(mscopy),msLength(mscopy),mscopy);
 
 
         return EXIT_SUCCESS;
 
 }
+
