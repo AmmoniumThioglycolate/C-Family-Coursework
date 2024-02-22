@@ -24,17 +24,39 @@ extern char *msGetString (msString str){
         return(myStr.string);
 }
 extern void  msCopy (msString *destination, msString source){
-        if (!((*destination)=(void *)malloc(sizeof(source)+1))){
+        void * ptr;
+        if (!((ptr)=(void *)malloc(sizeof(source)+1))){
                 printf("Insufficient memory\n");
                 exit(1);
         }
-        struct stringStruct destStr = *(struct stringStruct *)destination;
+        if (*destination == NULL){
+                *destination = msSetString("");
+        }
+        ptr = *destination;
+
+        struct stringStruct destStr = *(struct stringStruct *)ptr;
         struct stringStruct sourceStr = *(struct stringStruct *)source;
-        destStr.string = sourceStr.string;
-        free(*destination);
+        strcpy(destStr.string,sourceStr.string);
+        *(long int *)destStr.length = strlen(sourceStr.string);
 }
-extern void msConcatenate (msString *destStr, msString sourceStr){
-        
+extern void msConcatenate (msString *destination, msString source){
+        void * ptr;
+        if (!((ptr)=(void *)malloc(sizeof(source)+1))){
+                printf("Insufficient memory\n");
+                exit(1);
+        }
+        if (*destination == NULL){
+                *destination = msSetString("");
+        }
+        ptr = *destination;
+        struct stringStruct destStr = *(struct stringStruct *)ptr;
+        struct stringStruct sourceStr = *(struct stringStruct *)source;
+        printf("what is in destString is : %s\n",destStr.string);
+        printf("What is is source string is : %s\n",sourceStr.string);
+        strcat(destStr.string, sourceStr.string);
+        *(long int *)destStr.length = *(long int*)destStr.length + *(long int *)sourceStr.length;
+
+
 }
 extern long int  msLength (msString str){
         struct stringStruct  myStr = *(struct stringStruct *)str;
