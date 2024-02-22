@@ -36,15 +36,21 @@ char *new_print(void * ptr){
         return(myStr.string);
 
 }
-void copy(void **destination, void * source){
-        if (!((*destination)=(void *)malloc(sizeof(source)+1))){
+void copy(void * *destination, void * source){
+
+        void * ptr;
+        if (!((ptr)=(void *)malloc(sizeof(source)+1))){
                 printf("Insufficient memory\n");
                 exit(1);
         }
-        struct stringStruct destStr = *(struct stringStruct *)destination;
+        ptr = *destination;
+
+        struct stringStruct  destStr = *(struct stringStruct *)ptr;
         struct stringStruct sourceStr = *(struct stringStruct *)source;
-        destStr.string = sourceStr.string;
-        free(*destination);
+        printf("what is in destString is : %s\n",destStr.string);
+        printf("What is is source string is : %s\n",sourceStr.string);
+        strcpy(destStr.string, sourceStr.string);
+
 }
 long int length (void * ptr){
         struct stringStruct  myStr = *(struct stringStruct *)ptr;
